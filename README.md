@@ -1,6 +1,6 @@
 # ticket 13883
 
-This contains minimal repro for (ticket 13883)[https://code.djangoproject.com/ticket/13883].
+This contains minimal repro for [ticket 13883](https://code.djangoproject.com/ticket/13883).
 
 
 ## Setup
