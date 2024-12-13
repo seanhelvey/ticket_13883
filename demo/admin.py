@@ -4,6 +4,10 @@ from django.forms import ModelForm
 from .models import Sport, Profile
 
 class ProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['sports']
+
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
 
@@ -11,9 +15,9 @@ class ProfileForm(ModelForm):
         single_sports = []
         for sport in Sport.objects.all():
             if sport.is_team_sport:
-                team_sports.append((sport.name, sport.name))
+                team_sports.append((sport.id, sport.name))
             else:
-                single_sports.append((sport.name, sport.name))
+                single_sports.append((sport.id, sport.name))
         self.fields['sports'].choices = [['Team Sports', team_sports], ['Single Sports', single_sports]]
 
 class ProfileAdmin(admin.ModelAdmin):
