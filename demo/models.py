@@ -4,7 +4,7 @@ class Sport(models.Model):
     name = models.CharField(max_length=100)
     is_team_sport = models.BooleanField(default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Profile(models.Model):
