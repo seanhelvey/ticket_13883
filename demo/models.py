@@ -7,5 +7,11 @@ class Sport(models.Model):
     def __str__(self):
         return self.name
 
-class Profile(models.Model):
+class SportProfile(models.Model):
     sports = models.ManyToManyField(Sport)
+
+class UserProfile(models.Model):
+    user = models.ForeignKey("auth.User", models.CASCADE, to_field="username")
+
+    def __str__(self):
+        return self.user.username

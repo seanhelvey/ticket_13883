@@ -1,15 +1,15 @@
 from django.contrib import admin
 from django.forms import ModelForm
 
-from .models import Sport, Profile
+from .models import Sport, SportProfile, UserProfile
 
-class ProfileForm(ModelForm):
+class SportProfileForm(ModelForm):
     class Meta:
-        model = Profile
+        model = SportProfile
         fields = ['sports']
 
     def __init__(self, *args, **kwargs):
-        super(ProfileForm, self).__init__(*args, **kwargs)
+        super(SportProfileForm, self).__init__(*args, **kwargs)
 
         team_sports = []
         single_sports = []
@@ -21,8 +21,10 @@ class ProfileForm(ModelForm):
         self.fields['sports'].choices = [['Team Sports', team_sports], ['Single Sports', single_sports]]
 
 class ProfileAdmin(admin.ModelAdmin):
-    form = ProfileForm
+    form = SportProfileForm
     filter_horizontal = ('sports',)
 
-admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Sport)
+admin.site.register(SportProfile, ProfileAdmin)
+admin.site.register(UserProfile)
+
