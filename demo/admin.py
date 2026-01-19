@@ -1,5 +1,8 @@
 from django.contrib import admin
+from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin  # Import it first
 from django.forms import ModelForm
+from django.contrib.auth.models import Group
+from .forms import GroupForm
 
 from .models import Sport, SportProfile, UserProfile
 
@@ -24,7 +27,14 @@ class ProfileAdmin(admin.ModelAdmin):
     form = SportProfileForm
     filter_horizontal = ('sports',)
 
+# Unregister the default GroupAdmin (now it's loaded)
+admin.site.unregister(Group)
+
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
+    form = GroupForm
+    filter_horizontal = ('permissions',)
+
 admin.site.register(Sport)
 admin.site.register(SportProfile, ProfileAdmin)
 admin.site.register(UserProfile)
-
