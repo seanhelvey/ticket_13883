@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group, Permission
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from .forms import GroupedModelChoiceField
 
-from .models import Sport, SportProfile, UserProfile
+from .models import Sport, SportProfile, UserProfile, Analysis, Song
 
 class SportProfileForm(ModelForm):
     class Meta:
@@ -52,7 +52,16 @@ class GroupAdmin(admin.ModelAdmin):
             )
         return super().formfield_for_manytomany(db_field, request=request, **kwargs)
 
+class SongInline(admin.TabularInline):
+    model = Song
+
+
+class AnalysisAdmin(admin.ModelAdmin):
+    inlines = [SongInline]
+
+
 admin.site.register(Sport)
 admin.site.register(SportProfile, ProfileAdmin)
 admin.site.register(UserProfile)
 admin.site.register(Permission)
+admin.site.register(Analysis, AnalysisAdmin)

@@ -15,3 +15,10 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Analysis(models.Model):
+    pass
+
+class Song(models.Model):
+    users = models.ManyToManyField("auth.User")
+    analysis = models.ForeignKey("Analysis", on_delete=models.CASCADE, null=True)
